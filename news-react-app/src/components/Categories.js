@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const categories = [
   {
@@ -53,7 +53,7 @@ const CategoriesBlock = styled.div`
   }
 `
 
-const Category = styled(NavLink)`
+const Category = styled.div`
   font-size:1.05rem;
   cursor: pointer;
   white-space: pre;
@@ -77,16 +77,28 @@ const Category = styled(NavLink)`
 `;
 
 const Categories = () => {
-    return (
-        <CategoriesBlock>
-          <div className='inner'>
-            {categories.map(c => (
-                <Category key={c.name} className={({isActive}) => (isActive ? 'active' : undefined)} to={c.name === 'all' ? '/' : `/${c.name}`}>{c.text}</Category>
-            ))}
-            {/* NavLink에서의 to는 a태그처럼 링크를 의미함. */}
-          </div>
-        </CategoriesBlock>
-    );
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const goCategory = (categoryName) => {
+    navigate(categoryName === 'all' ? '/' : `/${categoryName}`);
+  }
+
+  return (
+    <CategoriesBlock>
+      <div className='inner'>
+        {categories.map(c => (
+          <Category
+            key={c.name}
+            className={(location.pathname === '/' && c.name === 'all') || location.pathname.includes(c.name) ? 'active' : ''}
+            onClick={() => goCategory(c.name)}
+          >
+            {c.text}
+          </Category>
+        ))}
+      </div>
+    </CategoriesBlock>
+  );
 };
 
 export default Categories;
