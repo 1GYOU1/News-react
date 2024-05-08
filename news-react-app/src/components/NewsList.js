@@ -22,8 +22,12 @@ margin: 6rem auto 0;
 const NewsList = ({category}) => {
 
     const [loading, response, error] = usePromise(()=>{
-        const query = category === 'all' ? '' : `&category=${category}`;
-        return axios.get(`https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=373c498f1c0046f4928af10e11c1e81c`);
+        const query = category === 'all' ? '' : `${category}`;
+        return axios.get(`https://1gyou1.github.io/API/json/new_react/${query ? query : 'all'}.json`);
+        /* 
+            api 원본 링크
+            https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=373c498f1c0046f4928af10e11c1e81c
+        */
     }, [category])
 
     if(loading){
