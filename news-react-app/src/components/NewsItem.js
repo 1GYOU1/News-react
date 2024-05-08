@@ -10,14 +10,18 @@ const NewsItemBlock = styled.div`
       display: block;
       width: 160px;
       height: 100px;
-      object-fit: cover;
+      object-fit:cover;
+      border-radius:5px;
     }
   }
   .contents {
     h2 {
       margin: 0;
+      font-size:1.1rem;
+      font-weight:500;
       a {
         color: black;
+        text-decoration:none;
       }
     }
     p {
@@ -25,6 +29,8 @@ const NewsItemBlock = styled.div`
       line-height: 1.5;
       margin-top: 0.5rem;
       white-space: normal;
+      font-size:0.9rem;
+      color:#767678;
     }
   }
   & + & {

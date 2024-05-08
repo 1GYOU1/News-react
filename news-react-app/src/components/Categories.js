@@ -34,10 +34,19 @@ const categories = [
 ];
 
 const CategoriesBlock = styled.div`
-  display: flex;
-  padding: 1rem;
-  width: 768px;
-  margin: 0 auto;
+  padding: 1.5rem 0 1rem 0;
+  background:#fff;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  .inner{
+    display: flex;
+    width: 768px;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
   @media screen and (max-width: 768px) {
     width: 100%;
     overflow-x: auto;
@@ -45,38 +54,37 @@ const CategoriesBlock = styled.div`
 `
 
 const Category = styled(NavLink)`
-  font-size: 1.125rem;
+  font-size:1.05rem;
   cursor: pointer;
   white-space: pre;
   text-decoration: none;
-  color: inherit;
-  padding-bottom: 0.25rem;
+  color:#7b7b7b;
+  padding:0.5rem 1.5rem;
+  background:#e1e0e0;
+  border-radius:2rem;
+  transition:all ease 0.5s;
 
   &:hover {
-    color: #495057;
+    color: #fff;
+    background:#495057;
   }
 
   &.active {
     font-weight: 600;
-    border-bottom: 2px solid #22b8cf;
-    color: #22b8cf;
-    &:hover {
-      color: #3bc9db;
-    }
-  }
-
-  & + & {
-    margin-left: 1rem;
+    color: #fff;
+    background:#495057;
   }
 `;
 
 const Categories = () => {
     return (
         <CategoriesBlock>
+          <div className='inner'>
             {categories.map(c => (
                 <Category key={c.name} className={({isActive}) => (isActive ? 'active' : undefined)} to={c.name === 'all' ? '/' : `/${c.name}`}>{c.text}</Category>
             ))}
             {/* NavLink에서의 to는 a태그처럼 링크를 의미함. */}
+          </div>
         </CategoriesBlock>
     );
 };

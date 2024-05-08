@@ -8,8 +8,10 @@ const NewsListBlock = styled.div`
 box-sizing: border-box;
 padding-bottom: 3rem;
 width: 768px;
-margin: 0 auto;
-margin-top: 2rem;
+margin: 6rem auto 0;
+&.loading{
+    text-align:center;
+}
 @media screen and (max-width: 768px) {
   width: 100%;
   padding-left: 1rem;
@@ -25,7 +27,7 @@ const NewsList = ({category}) => {
     }, [category])
 
     if(loading){
-        return <NewsListBlock>대기 중...</NewsListBlock>
+        return <NewsListBlock className="loading">Loading...</NewsListBlock>
     }
     //아직 response 값이 설정되지 않았을때
     if(!response){
